@@ -24,48 +24,48 @@
         </div>
 
         <!--Carousel Wrapper-->
-        <mdb-carousel [isControls]="false" class="carousel-multi-item multi-animation" [type]="''" [animation]="'slide'">
+        <mdb-carousel #carousel [isControls]="false" class="carousel-multi-item multi-animation" [type]="''" [animation]="'slide'">
             <!--slide-->
             <mdb-slide *ngFor='let n of newArr'>
 
-              
 
 
-                    <ng-container *ngFor='let o of n; let i = index'>
-                        <ng-container *ngIf="compare(i)">
-                            <div class="col-md-4" >
-                                <a [routerLink]="['/news-details-page', o.id]">
-                        <div class="card">
 
-                            <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" alt="Card image cap">
-                            <div class="carousel-caption">
-                                <h4>{{o.title}}</h4>
-                                <div class="col-md-4">
-                                    <p>News</p>
+                <ng-container *ngFor='let o of n; let i = index'>
+                    <ng-container *ngIf="compare(i)">
+                        <div class="col-md-4">
+                            <a [routerLink]="['/news-details-page', o.id]">
+                                <div class="card">
+
+                                    <img class="img-fluid img-thumbnail" src="{{o.main_image}}" alt="Card image cap">
+                                    <div class="carousel-caption">
+                                        <h4>{{o.title}}</h4>
+                                        <div class="col-md-4">
+                                            <p>News</p>
+                                        </div>
+                                    </div>
+
                                 </div>
-                            </div>
-
+                            </a>
                         </div>
-                                </a>
-                            </div>
-                        </ng-container>
-                        <ng-container *ngIf="!compare(i)">
-                            <div class="col-md-4 clearfix d-none d-md-block" >
-                                <a [routerLink]="['/news-details-page', o.id]">
-                            <div class="card">
-                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" alt="Card image cap">
-                                <div class="carousel-caption">
-                                    <h4>{{o.title}}</h4>
-                                    <div class="col-md-4">
-                                        <p>News</p>
+                    </ng-container>
+                    <ng-container *ngIf="!compare(i)">
+                        <div class="col-md-4 clearfix d-none d-md-block">
+                            <a [routerLink]="['/news-details-page', o.id]">
+                                <div class="card">
+                                    <img class="img-fluid img-thumbnail" src="{{o.main_image}}" alt="Card image cap">
+                                    <div class="carousel-caption">
+                                        <h4>{{o.title}}</h4>
+                                        <div class="col-md-4">
+                                            <p>News</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                                </a>
-                            </div>
-                        </ng-container>
-
+                            </a>
+                        </div>
                     </ng-container>
+
+                </ng-container>
 
 
 

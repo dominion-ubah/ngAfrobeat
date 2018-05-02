@@ -9,7 +9,7 @@
             </p>
             <a href="">coming Soon!!!</a>
         </div>
-        <div class="col-md-4 elegant scrollbar-dusty-grass">
+        <div class="col-md-5 elegant scrollbar-dusty-grass">
             <h4>
                 News Posts
             </h4>
@@ -29,14 +29,14 @@
 
                                     <!-- Text -->
 
-                                    <p class="card-text">{{n.body}} </p>
+                                    <p class="card-text">{{n.subtitle}} </p>
 
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <!-- Card image -->
                                 <div class="view overlay">
-                                    <img class="card-img-bottom" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap">
+                                    <img class="card-img-bottom" src="{{n.main_image}}" alt="Card image cap">
                                     <a href="#!">
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <h4>
                 News Details
             </h4>
@@ -145,28 +145,31 @@
                         <input mdbInputDirective mdbActive type="text" [(ngModel)]="f.subtitle" name="subtitle" id="subtitle" class="form-control">
                         <label for="subtitle" class="">News Subtitle</label>
                     </div>
-                    <div class="md-form">
+                    <!-- <div class="md-form">
                         <input mdbInputDirective mdbActive type="text" [(ngModel)]="f.tags" name="tags" id="tags" class="form-control">
                         <label for="tags" class="">Tags</label>
-                    </div>
-                    <div class="md-form">
-                        <input mdbInputDirective mdbActive type="text" [(ngModel)]="f.categories" name="category" id="categories" class="form-control">
+                    </div> -->
+                    <!-- <div class="md-form">
+                        <input mdbInputDirective mdbActive type="text" [(ngModel)]="f.categories" name="categories" id="categories" class="form-control">
                         <label for="category" class="">Category</label>
-                    </div>
+                    </div> -->
                     <!--Basic textarea-->
                     <div class="md-form">
-                        <textarea mdbInputDirective mdbActive type="text" [(ngModel)]="f.body" name="body" id="content" class="md-textarea form-control" rows="3"></textarea>
+                        <textarea mdbInputDirective mdbActive type="text" [(ngModel)]="f.content" name="content" id="content" class="md-textarea form-control" rows="3"></textarea>
                         <label for="content">News Content</label>
                     </div>
-                    <div class="file-field md-form">
+                    <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
+                    <button [disabled]="loading" (click)="upload()" class="btn btn-success mt-3">Upload</button>
+                    <!-- <div class="file-field md-form">
                         <div class="btn btn-primary btn-sm waves-light" mdbWavesEffect>
                             <span>Upload Main Image</span>
-                            <input type="file" name="main_image" mdbFileSelect (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+                            <input type="file" name="imageArray" mdbFileSelect (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
                         </div>
                         <div class="file-path-wrapper">
-                            <input class="file-path" type="text" placeholder="Upload your Image" [value]="showFiles()">
+                            <input class="file-path" type="text" placeholder="Upload your Main Image" [value]="showFiles()">
                         </div>
-                    </div>
+                    </div> -->
+
 
                 </div>
                 <div class="modal-footer">

@@ -19,39 +19,40 @@
                     </li>
                 </ul>
             </div>
-            <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'" [animation]="'slide'">
+            <mdb-carousel #carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'" [animation]="'slide'">
 
                 <!--Third slide-->
                 <mdb-slide *ngFor='let n of newArr'>
                     <ng-container *ngFor='let o of n; let i = index'>
                         <ng-container *ngIf="compare(i)">
 
-                    <div class="col-md-4"  >
-                            <a [routerLink]="['/news-details-page', o.id]">
-                        <div class="card">
-                            <img class="imgDimension" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg" alt="Card image cap">
-                            <div class="carousel-caption">
-                                <h4>{{o.title}}</h4>
-                                <p>We had such a great time in LA!</p>
+                            <div class="col-md-4">
+                                <a [routerLink]="['/news-details-page', o.id]">
+                                    <div class="card">
+                                        <img class="imgDimension" src="{{o.main_image}}" alt="Card image cap">
+                                        <div class="carousel-caption">
+                                            <h4 style=' font-size:90%; background-color:rgba(20, 20, 70, 0.5)'>{{o.title}}</h4>
+                                            <!-- <h4>{{o.subtitle}}</h4>
+                                            <p>We had such a great time in LA!</p> -->
+                                        </div>
+
+                                    </div>
+                                </a>
                             </div>
 
-                                </div>
-                            </a>
-                    </div>
 
-
-                  </ng-container>
+                        </ng-container>
                         <ng-container *ngIf="!compare(i)">
-                            <div class="col-md-4 clearfix d-none d-md-block"  >
+                            <div class="col-md-4 clearfix d-none d-md-block">
                                 <a [routerLink]="['/news-details-page', o.id]">
 
-                                <div class="card">
-                                    <img class="imgDimension" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg" alt="Card image cap">
-                                    <div class="carousel-caption">
-                                        <h4>{{o.title}}</h4>
-                                        <p>We had such a great time in LA!</p>
+                                    <div class="card">
+                                        <img class="imgDimension" src="{{o.main_image}}" alt="Card image cap">
+                                        <div class="carousel-caption">
+                                            <h4 style=' font-size:90%; background-color:rgba(20, 20, 70, 0.5)'>{{o.title}}</h4>
+                                            <!-- <p>{{o.subtitle}}</p> -->
+                                        </div>
                                     </div>
-                                </div>
                                 </a>
                             </div>
                         </ng-container>

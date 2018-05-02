@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 import { ToastModule } from './typescripts/pro/alerts/toast/toast.module';
 import { MDBSpinningPreloader } from './typescripts/pro/index';
+// import { MDBSpinningPreloader } from 'ng-mdb-pro';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +22,30 @@ import { EventsModule } from './modules/events/events.module';
 import { AdvertsModule } from './modules/adverts/adverts.module';
 import { NewsService } from 'app/modules/news/news.service';
 import { AdminModule } from './admin/admin.module';
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 
+declare var Hammer: any;
+
+
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any> {
+    'pan': { direction: Hammer.DIRECTION_All },
+    'swipe': { direction: Hammer.DIRECTION_VERTICAL },
+  };
+
+  buildHammer(element: HTMLElement) {
+    const mc = new Hammer(element, {
+      touchAction: 'auto',
+          inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput,
+          recognizers: [
+            [Hammer.Swipe, {
+              direction: Hammer.DIRECTION_HORIZONTAL
+            }]
+          ]
+    });
+    return mc;
+  }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +72,12 @@ import { AdminModule } from './admin/admin.module';
     AdvertsModule,
     AdminModule
   ],
-  providers: [MDBSpinningPreloader, NewsService],
+  providers: [MDBSpinningPreloader, NewsService,
+    {
+        provide: HAMMER_GESTURE_CONFIG,
+        useClass: MyHammerConfig
+    }
+],
   bootstrap: [AppComponent],
   schemas:      [ NO_ERRORS_SCHEMA ]
 })

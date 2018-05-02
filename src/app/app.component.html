@@ -1,2 +1,56 @@
-<router-outlet></router-outlet>
+<ng-container *ngIf='newsSignal'>
+    <router-outlet></router-outlet>
+</ng-container>
 
+<ng-container *ngIf='!newsSignal'>
+    <div class="spinning-preloader-container">
+        <!-- <div class="col-md-12"></div>
+        <div class="col-md-12"></div> -->
+        <div class="preloader-wrapper" style="margin-top:-10em; margin-left:0;">
+
+            <logo>
+                <a class="logo navbar-brand" href="#"><img src="http://res.cloudinary.com/sammiestarks/image/upload/v1512465818/unnamed_hqta5f.jpg"></a>
+            </logo>
+        </div>
+
+        <div class="preloader-wrapper big active" style=" margin-left:-1.5em;">
+
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"> </div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"> </div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"> </div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"> </div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"> </div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"> </div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"> </div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"> </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>

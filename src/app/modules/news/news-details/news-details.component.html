@@ -33,15 +33,16 @@
     <div class="container">
         <div class="row">
             <div class="newsDetail col-md-8">
-                <h1>{{news$.title}}</h1>
-                <span class="time">
-          04/12/2018
-        </span>
-                <img class="mainPic" src="http://res.cloudinary.com/sammiestarks/image/upload/v1523533077/fuo55ox74sq3habwlut9.jpg">
-                <p>Actress Ufuoma McDermott celebrated her 8th wedding anniversary to husband Steven McDermott yesterday. The couple got married in 2010 and have two lovely kids, Kesiena Alize and Isio Jared. To mark the anniversary, Ufuoma McDermott had
-                    a photo session shot by Ebenezer Dada which she tagged #100ShadesOfUfuoma. She captioned a photo with Today is my official #WeddingAnniversary This day 8 years ago, my husband and I, together with a few friends signed the dotted lines
-                    at the Ikoyi registry. 8 years gone. 80 more to go</p>
-                <img class="subPic" src="http://res.cloudinary.com/sammiestarks/image/upload/v1523533077/fuo55ox74sq3habwlut9.jpg">
+                <ng-container *ngIf='this.news'>
+                    <h1>{{news ? news.title : '' }}</h1>
+                    <span class="time">
+                            {{news ? news.created_at.date : '' }}
+                </span>
+                    <img class="mainPic" src="{{news ? news.main_image : ''}}">
+                    <p>{{news ? news.content : ''}}</p>
+                    <img class="subPic" src="{{news ? news.images : ''}}">
+                </ng-container>
+
                 <div class="shareTags row">
                     <div class="col-md-6">
                         <h4>Share it:</h4>

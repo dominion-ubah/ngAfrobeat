@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MDBSpinningPreloader } from './typescripts/pro/index';
+import { NewsService } from 'app/modules/news/news.service';
 // import { ToastService } from './typescripts/pro/alerts';
 
 @Component({
@@ -8,5 +10,18 @@ import { Component } from '@angular/core';
 
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
+  public newsSignal;
+  constructor(private mdbSpinningPreloader: MDBSpinningPreloader, private newsService: NewsService) {}
+
+  ngOnInit() {
+    this.mdbSpinningPreloader.start();
+    this.newsService.getNews().subscribe(e => {
+      this.newsSignal = e
+      this.mdbSpinningPreloader.stop();
+      return this.newsSignal;
+      
+    });
+    
+  }
 }

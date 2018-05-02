@@ -1,6 +1,8 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
+        "noImplicitAny": false,
+        "noStrictGenericChecks": false,
         "outDir": "./dist/out-tsc",
         "baseUrl": "src",
         "sourceMap": true,
@@ -9,8 +11,9 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noUnusedLocals": true,
-        "noUnusedParameters": true,
+        "noUnusedParameters": false,
         "target": "es5",
+        "strict": false,
         "typeRoots": [
             "node_modules/@types"
         ],

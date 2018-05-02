@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { NewsService } from 'app/modules/news/news.service';
 // import { SlideComponent } from './typescripts/free/carousel/slide.component';
 @Component({
@@ -8,18 +8,27 @@ import { NewsService } from 'app/modules/news/news.service';
   styleUrls: ['./news-carousel.component.scss']
 })
 export class NewsCarouselComponent implements OnInit {
+  @ViewChild('carousel') public el: any;
+  public news$;
   public news;
   public myInterval: Number = 3000;
   public activeSlideIndex: Number = 0;
   public noWrapSlides: Boolean = false;
+  public newArr;
+  // public slides: Array<Object> = [
 
-  public slides: Array<Object> = [
-      {'image': 'https://mdbootstrap.com/img/Photos/Slides/img%20(18).jpg'},
-      {'image': 'https://mdbootstrap.com/img/Photos/Slides/img%20(19).jpg'},
-      {'image': 'https://mdbootstrap.com/img/Photos/Slides/img%20(20).jpg'},
-      {'image': 'https://mdbootstrap.com/img/Photos/Slides/img%20(20).jpg'},
-  ];
+  //     {'image': 'https://mdbootstrap.com/img/Photos/Slides/img%20(18).jpg'},
+  //     {'image': 'https://mdbootstrap.com/img/Photos/Slides/img%20(19).jpg'},
+  //     {'image': 'https://mdbootstrap.com/img/Photos/Slides/img%20(20).jpg'},
+  //     {'image': 'https://mdbootstrap.com/img/Photos/Slides/img%20(20).jpg'},
+  // ];
+  @HostListener('swipeleft', ['$event']) public swipePrev(event: any) {
+    this.el.previousSlide();
+}
 
+@HostListener('swiperight', ['$event']) public swipeNext(event: any) {
+    this.el.nextSlide();
+}
 // mockdata
 // public news: Array<object> =  [
 //   {
@@ -59,27 +68,13 @@ export class NewsCarouselComponent implements OnInit {
 //       'content': '.mlknbjvhcgfxdzxfcgvhbjnkml'
 //   }
 //   ]
-public newArr;
+
  breakIntoThrees (xos) {
+   console.log('from carousel:' + xos)
    this.newArr = [];
-      // tslint:disable-next-line:no-console
-      // console.log(xos, xos.length, xos.slice(0, 3));
+
       this.ar (xos);
 
-      // for (let i in xos) {
-      //   if (xos) {
-      //     let b = xos.slice(0, 3)
-      //   // this.newArr.push(
-
-      //   // )
-      //     // tslint:disable-next-line:no-console
-
-
-      //     // console.log(this.newArr, i);
-      //     console.log(xos, xos.length, xos.slice(0, 3), xos.splice(0, 3) b);
-
-      //   }
-      // }
       return this.newArr;
 
 
@@ -89,8 +84,11 @@ public newArr;
 
       // tslint:disable-next-line:no-console
       console.log('initial:', xos);
+      // take out the first three as an array
       const a = xos.slice(0, 3);
+      // push that sliced array of three into newArr Array
       this.newArr.push(a);
+      // delete the copy of three that is left in the original array and present the new array
       xos = xos.splice(3, 3);
       // tslint:disable-next-line:no-console
       console.log(xos);
@@ -107,37 +105,32 @@ public newArr;
 
   }
 
-  infiniteLoop(arr, num) {
-    // tslint:disable-next-line:prefer-const
-    let answer = [];
-    let count = 0;
-    for (let i = 0; i < num.length; i++) {
-      answer[i] = [];    // <--- add this
-      for (let j = 0; j < num[i]; j++, count++) {
-        answer[i][j] = arr[count];
-      }
-
-    }
-    // tslint:disable-next-line:no-console
-    console.log(answer ) ;
-  }
-
   activeSlideChange() {
     // console.log(this.activeSlideIndex);
 }
 
-constructor(newsService: NewsService) {
-  this.news = newsService.getNews().map(e => {
-    return e;
-  })
+constructor(private newsService: NewsService) {
+
 }
 ngOnInit() {
-  this.breakIntoThrees(this.news);
-  this.infiniteLoop(this.news, 3);
+  this.getNewsService();
+
+  // this.infiniteLoop(this.news, 3);
 }
 
+getNewsService() {
+  this.newsService.getNews().subscribe(d => {
+    this.news$ = d;
+    this.news = this.news$.data;
+    console.log(this.news);
+    this.breakIntoThrees(this.news);
+  },
+  err => console.log(err),
+  () => console.log('done')
+)
+}
 
-compare(i){
+compare(i) {
      if (i === 1){
          return true;
      }
