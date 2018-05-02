@@ -10,6 +10,9 @@ import { CelebpageComponent } from 'app/pages/celebpage/celebpage.component';
 import { IreportpageComponent } from 'app/pages/ireportpage/ireportpage.component';
 // import { DetailpageComponent } from 'app/pages/detailpage/detailpage.component';
 import { NewsDetailsComponent } from 'app/modules/news/news-details/news-details.component';
+import {MusicDetailsComponent} from 'app/modules/music/music-details/music-details.component';
+import {AlbumDetailsComponent} from './modules/music/album-details/album-details.component';
+import {ArtistDetailsComponent} from './modules/music/artist-details/artist-details.component';
 
 
 const routes = RouterModule.forRoot([
@@ -50,6 +53,18 @@ const routes = RouterModule.forRoot([
         path: 'news-details-page/:id',
         component: NewsDetailsComponent
       },
+      {
+        path: 'music-details-page',
+        component: MusicDetailsComponent
+        },
+        {
+            path: 'album-details-page',
+            component: AlbumDetailsComponent
+        },
+        {
+            path: 'artist-details-page',
+            component: ArtistDetailsComponent
+        },
       // { path: '', redirectTo: 'home', pathMatch: 'full' },
 
     ]
