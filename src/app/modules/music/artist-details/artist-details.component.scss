@@ -1,18 +1,22 @@
 .highLight{
   background-image: url("http://res.cloudinary.com/sammiestarks/image/upload/v1516292351/webCover2_nlqs6x.png");
+
   padding-top: 150px;
-  padding-bottom: 60px;
-  height: 450px;
+  h1{
+    text-align: center;
+  }
+  p{
+    text-align: center;
+  }
+  //height: 450px;
   .leftImage{
     img{
-      width: 100%;
-      max-width: 100%;
       border-radius: 10px;
-      vertical-align: middle;
+      //vertical-align: middle;
+      position: relative;
     }
   }
 }
-
 .searchBar{
   border-style: solid;
   border-width: 5px;
@@ -39,6 +43,7 @@
     font-weight: 700;
     text-transform: none;
     margin-bottom: 25px;
+    text-align: center;
   }
   p{
     display: block;
@@ -51,6 +56,7 @@
     font-style: inherit;
     font-weight: inherit;
     color: grey;
+    text-align: center;
   }
 
   a{
@@ -61,5 +67,116 @@
 }
 
 .mainWrapper{
-  padding-top: 50px;
+  //padding-top: 50px;
+
+}
+video{
+  max-width: 100%;
+  height: 150px;
+  width: 100%;
+}
+
+.sideBarLabels{
+  h3{
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Dosis', sans-serif;
+    color: black;
+    text-transform: uppercase;
+  }
+
+  h4{
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Dosis', sans-serif;
+    color: black;
+    text-transform: uppercase;
+    margin-top: 40px;
+  }
+
+  h5{
+    font-size: 20px;
+    font-family: 'Dosis', sans-serif;
+    color: black;
+    text-transform: uppercase;
+  }
+
+  img{
+    height: 70px;
+    width: 70px;
+  }
+
+  .spotlightDetails{
+    padding-top: 15px;
+    h5{
+      font-weight: bold;
+      font-size: 14px;
+    }
+    p{
+      font-size: 14px;
+    }
+  }
+
+  .spotlight{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .cateLinks{
+    a{
+      text-decoration: none;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      color: black;
+      font-weight: 300;
+      text-transform: none;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+  }
+
+  .searchBar{
+    background-color: #f6f7f9;
+    border: 1px solid #9ca9b7;
+    border-radius: 2px;
+    input{
+      color: #9ca9b7;
+    }
+
+  }
+
+  .relatedStyles{
+    a{
+      text-decoration: none;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      color: black;
+      font-weight: 400;
+      text-transform: none;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    img{
+      height: 70px;
+      width: 70px;
+    }
+  }
+
+  .tagNavs{
+    a{
+      margin-right: 5px;
+    }
+  }
+
+  .aDs{
+    margin-top: 100px;
+
+    img{
+      height: auto;
+      width: 100%;
+      border: 0;
+      vertical-align: middle;
+    }
+  }
 }
