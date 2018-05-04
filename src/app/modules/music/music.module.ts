@@ -16,7 +16,15 @@ import { ArtistDetailsComponent } from './artist-details/artist-details.componen
     CommonModule,
     SharedModule
   ],
-  declarations: [MusicCarouselComponent, MusicDetailsComponent, MusicListComponent, ArtistCarouselComponent, AlbumCarouselComponent, ArtistListComponent, AlbumListComponent, AlbumDetailsComponent, ArtistDetailsComponent],
+  declarations: [ MusicCarouselComponent,
+                  MusicDetailsComponent,
+                  MusicListComponent,
+                  ArtistCarouselComponent,
+                  AlbumCarouselComponent,
+                  ArtistListComponent,
+                  AlbumListComponent,
+                  AlbumDetailsComponent,
+                  ArtistDetailsComponent],
   schemas: [ NO_ERRORS_SCHEMA ],
   exports: [
       MusicCarouselComponent,

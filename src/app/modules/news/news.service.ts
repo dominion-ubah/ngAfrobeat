@@ -51,6 +51,11 @@ public baseUrl= 'http://api.afrobeat.com/public';
 
   };
 
+  updateNews(id, updatedNews) {
+    return this.http.put(this.baseUrl + '/api/news/' + id, updatedNews, httpOptions)
+
+  };
+
 
 }
 

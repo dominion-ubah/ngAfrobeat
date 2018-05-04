@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 import { ToastModule } from './typescripts/pro/alerts/toast/toast.module';
 import { MDBSpinningPreloader } from './typescripts/pro/index';
+import { FacebookModule } from 'ngx-facebook';
 // import { MDBSpinningPreloader } from 'ng-mdb-pro';
 
 import { AppComponent } from './app.component';
@@ -61,6 +62,7 @@ export class MyHammerConfig extends HammerGestureConfig {
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en#key
       apiKey: 'Your_api_key'
     }),
+    FacebookModule.forRoot(),
     AppRoutingModule,
     SharedModule,
     PagesModule,

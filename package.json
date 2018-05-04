@@ -41,6 +41,7 @@
     "ng-html-util": "1.0.x",
     "ng2-cloudinary": "^0.9.2",
     "ngm-cli": "0.5.x",
+    "ngx-facebook": "^2.4.0",
     "ngx-moment": "^2.0.0",
     "rxjs": "^5.5.2",
     "screenfull": "3.3.x",

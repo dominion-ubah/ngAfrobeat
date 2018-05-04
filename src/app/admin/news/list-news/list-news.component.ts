@@ -19,6 +19,9 @@ export class ListNewsComponent implements OnInit {
     new CloudinaryOptions({ cloudName: 'sammiestarks', uploadPreset: 'hk2z3dtq', autoUpload: true, })
    );
 public news$;
+public singleNews;
+public singleNews$;
+public editContent;
    public loading;
   public newsArray;
   public imgArr = [];
@@ -40,17 +43,30 @@ public news$;
 
       ngOnInit() {
         this.getNewsService();
+
       }
 
       getNewsService() {
         this.newsService.getNews().subscribe(d => {
           this.news$ = d;
           this.newsArray = this.news$.data;
-            
         },
         err => console.log(err),
         () => console.log('done')
       )
+      }
+      getSingleNews(news_id) {
+        // console.log('get single news:', news_id, this.newsArray.map(e => {
+        //   return e.id;
+        // }));
+        // return this.singleNews = this.newsArray.filter(e => e.id === news_id);
+        this.newsService.getOneNews(news_id).subscribe(d => {
+
+          this.singleNews$ = d;
+          console.log('get singlenews with id' , this.singleNews$)
+
+          this.singleNews = this.singleNews$.data;
+        })
       }
       populateImgArr(res) {
         if (this.imgArr.length < 2) {
@@ -67,7 +83,6 @@ public news$;
         }
       }
       upload() {
-        this.loading = true;
         this.uploader.uploadAll();
         this.uploader.onSuccessItem = (
           item: any,
@@ -76,7 +91,6 @@ public news$;
           headers: any
         ): any => {
              let res: any = JSON.parse(response);
-             this.loading = false;
              console.log(res.url, item, status, headers, this.loading);
            this.populateImgArr(res);
            
@@ -139,30 +153,55 @@ public news$;
       //             this.showFiles();
 
       //         }
+      setFormEdit(news) {
+        this.editContent = news;
+        this.newsModal.show();
+      }
+      submitNewsForm(f, edit) {
+        if ( edit ) {
+          console.log('show news for edit:' , edit);
+          console.log('Editing News:', f.value, this.editContent.id);
 
-      submitNewsForm(f) {
-        console.log(this.imgArr);
-       if(this.imgArr.length === 2) {
-          let a = this.imgArr.slice(0, 1);
-          let b = this.imgArr.splice(1, 1);
-          f.value.main_image = a[0];
-          f.value.images = b[0];
-        }else{
-          f.value.main_image = '';
-          f.value.images = '';
+          // this.newsArray.unshift(f.value);
+          this.newsService.updateNews( this.editContent.id, f.value ).subscribe(res => {
+            console.log(res);
+            this.toastService.success('News Content has been Edited');
+          },
+        error => {
+          console.error(error);
+          this.toastService.error('News Content edit has failed click to refresh www.afrobeat.com/admin/admin-news');
+        })
+
+        } else {
+          console.log('Creating News:' , f.value);
+          if(this.imgArr.length === 2) {
+            let a = this.imgArr.slice(0, 1);
+            let b = this.imgArr.splice(1, 1);
+            f.value.main_image = a[0];
+            f.value.images = b[0];
+          }else{
+            f.value.main_image = '';
+            f.value.images = '';
+          }
+          this.newsArray.unshift(f.value);
+        this.newsService.postNews(f.value).subscribe(res => {
+          console.log(res);
+          this.toastService.success('News Content has been Posted');
+        },
+      error => {
+        console.error(error);
+        this.toastService.error('News Content was not posted due to an error click to refresh www.afrobeat.com/admin/admin-news');
+
+      })
         }
+        console.log(this.imgArr);
+      
    //         let e = {};
    // e.title = 'qwwetrsjdv';
    // e.subtitle = 'lsmdnkvlsdjv';
    // e.content = 'mdslvknvjds';
    // e.main_image = 'ml;dnckls';
    // e.images = 'mlkncjabc';
-
-        console.log('from angular', f.value);
-        // this.newsArray.unshift(f.value);
-        this.newsService.postNews(f.value).subscribe(res => {
-          console.log(res);
-        })
         this.newsModal.hide();
 
       }

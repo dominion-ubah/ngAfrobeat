@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="row mr-auto px-md-3">
-        <div class="col-md-4">
+    <div class="row mr-auto px-md-2">
+        <div class="col-md-3">
             <h4>
                 Recent Posts
             </h4>
@@ -9,7 +9,7 @@
             </p>
             <a href="">coming Soon!!!</a>
         </div>
-        <div class="col-md-5 elegant scrollbar-dusty-grass">
+        <div class="col-md-4 elegant scrollbar-dusty-grass">
             <h4>
                 News Posts
             </h4>
@@ -17,7 +17,7 @@
                 <div class="col-md-12 my-md-1" *ngFor="let n of newsArray">
 
                     <!-- Card -->
-                    <div class="card">
+                    <div class="card" (click)='getSingleNews(n.id)'>
                         <h4 class="card-title px-md-1 py-md-1">{{n.title}}</h4>
                         <div class="row">
 
@@ -62,18 +62,50 @@
             </div>
         </div>
 
-        <div class="col-md-3">
-            <h4>
-                News Details
-            </h4>
-            <p>Display News Details here
+        <div class="col-md-5">
+            <!-- <ng-container *ngIf='!singleNews'>
+                <h4>
+                    News Details
+                </h4>
+                <p>
+                    Display News Details here
+                </p>
+                <a href="">
+                    coming Soon!!!
+                </a>
+            </ng-container> -->
+            <ng-container *ngIf='this.singleNews'>
+                <div class="card col-md-12">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4>
+                                News Details
+                            </h4>
+                        </div>
+                        <div class="col-md-2">
+                            <i class="fa fa-edit right light-green-text mt-1" (click)='setFormEdit(this.singleNews)'></i>
+                        </div>
+                    </div>
 
-            </p>
-            <a href="">coming Soon!!!</a>
 
+                    <h5>
+                        {{singleNews? singleNews.title: 'is not available'}}
+                    </h5>
+
+                    <span>Updated At:{{singleNews.created_at.date}}</span>
+                    <img src="{{singleNews.main_image}}" alt="">
+                    <p>
+                        {{singleNews.content}}
+                    </p>
+                    <img src="{{singleNews.images}}" alt="">
+                </div>
+
+            </ng-container>
         </div>
     </div>
 </div>
+
+
 
 
 
@@ -109,7 +141,7 @@
 
 
 <div mdbModal #newsModal="mdb-modal" class="modal fade" id="newNewsForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-side modal-bottom-right modal-lg" role="document">
+    <div class="modal-dialog modal-side modal-bottom-right modal-lg" style="min-width:50em" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <!-- //  export class News {
@@ -126,7 +158,7 @@
                                         'title': 'hue',
                                         'createdBy': 'primary',
                                         'content': '.mlknbjvhcg -->
-                <h4 class="modal-title w-100" id="myModalLabel">Post News</h4>
+                <h4 class="modal-title w-100" id="myModalLabel">{{editContent? "Edit News":"Post News"}}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="newsModal.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -138,12 +170,12 @@
 
 
                     <div class="md-form">
-                        <input mdbInputDirective mdbActive type="text" [(ngModel)]="f.title" name="title" id="title" class="form-control">
-                        <label for="title" class="">News Title</label>
+                        <input mdbInputDirective mdbActive type="text" [(ngModel)]="this.editContent? this.editContent.title : f.title" name="title" id="title" class="form-control">
+                        <label for="title" class="" [class.active]="this.editContent"> News Title</label>
                     </div>
                     <div class="md-form">
-                        <input mdbInputDirective mdbActive type="text" [(ngModel)]="f.subtitle" name="subtitle" id="subtitle" class="form-control">
-                        <label for="subtitle" class="">News Subtitle</label>
+                        <input mdbInputDirective mdbActive type="text" [(ngModel)]="this.editContent? this.editContent.subtitle:f.subtitle" name="subtitle" id="subtitle" class="form-control">
+                        <label for="subtitle" class="" [class.active]="this.editContent">News Subtitle</label>
                     </div>
                     <!-- <div class="md-form">
                         <input mdbInputDirective mdbActive type="text" [(ngModel)]="f.tags" name="tags" id="tags" class="form-control">
@@ -155,8 +187,8 @@
                     </div> -->
                     <!--Basic textarea-->
                     <div class="md-form">
-                        <textarea mdbInputDirective mdbActive type="text" [(ngModel)]="f.content" name="content" id="content" class="md-textarea form-control" rows="3"></textarea>
-                        <label for="content">News Content</label>
+                        <textarea mdbInputDirective mdbActive type="text" [(ngModel)]="this.editContent? this.editContent.content:f.content" name="content" id="content" class="md-textarea form-control" rows="3"></textarea>
+                        <label for="content" [class.active]="this.editContent">News Content </label>
                     </div>
                     <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
                     <button [disabled]="loading" (click)="upload()" class="btn btn-success mt-3">Upload</button>
@@ -174,7 +206,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="newsModal.hide()" mdbWavesEffect>Close</button>
-                    <button type="button" class="btn btn-primary btn-sm waves-light" (click)="submitNewsForm(f)" mdbWavesEffect>Save changes</button>
+                    <button type="button" class="btn btn-primary btn-sm waves-light" (click)="submitNewsForm(f, this.editContent)" mdbWavesEffect>Save changes</button>
                 </div>
             </form>
         </div>
