@@ -28,13 +28,13 @@
   font-family: 'Dosis', sans-serif;
   color: white;
   text-transform: uppercase;
-  margin-left: 500px;
+  margin-left: 450px;
 }
 
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) {
   .headerTitle{
-    margin-left: 150px;
+    margin-left: 100px;
   }
 }
 
@@ -172,6 +172,9 @@
   }
 
   .celebStyles{
+    .avatar{
+      margin: 10px;
+    }
     img{
       height: 300px;
       width: 100%;
