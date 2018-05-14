@@ -33,7 +33,7 @@
                             <a class="nav-link" routerLink='/ireportpage' routerLinkActive="active">i-report</a>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius>
-                            <a class="nav-link" routerLink='/admin'>log-in</a>
+                            <a class="nav-link" (click)="authModal.show()" data-toggle="modal" data-target="#newAuthForm">log-in</a>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius style="background-color: deeppink; border-radius: 20px; font-family: 'Dosis', sans-serif; padding-left: 10px; padding-right: 10px;">
                             <a class="nav-link">sign-up</a>
@@ -44,5 +44,57 @@
 
             </mdb-navbar>
         </header>
+    </div>
+</div>
+
+<div mdbModal #authModal="mdb-modal" class="modal fade" id="newAuthForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-side modal-bottom-right modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- //  export class News {
+                        //     id: number;
+                        //     title: string;
+                        //     subtitle: string;
+                        //     content: string;
+                        //     main_image: string;
+                        //     images: Array<string>;
+                        //     tags: Array<string>;
+                        //     categories: Array<string>
+                        // }
+                                        'id': '1',
+                                        'title': 'hue',
+                                        'createdBy': 'primary',
+                                        'content': '.mlknbjvhcg -->
+                <h4 class="modal-title w-100" id="myModalLabel">{{signup? "Not Registered? Sign Up.":"Registered? Sign In..."}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="authModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+            </div>
+            <form action="" #f="ngForm">
+                <div class="modal-body">
+
+
+
+                    <div class="md-form">
+                        <input mdbInputDirective mdbActive type="text" [(ngModel)]="this.signup? this.signup.username : f.username" name="username" id="username" class="form-control">
+                        <label for="username" class="" [class.active]="this.signup"> User Name</label>
+                    </div>
+                    <div class="md-form">
+                        <input mdbInputDirective mdbActive type="password" [(ngModel)]="this.signup? this.signup.password:f.password" name="password" id="password" class="form-control">
+                        <label for="password" class="" [class.active]="this.signup">Password</label>
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="authModal.hide()" mdbWavesEffect>Leave</button>
+                    <button type="button" class="btn btn-primary btn-sm waves-light" (click)="submitLoginForm(f, this.signup)" mdbWavesEffect>{{signup? "Update News":"Sign In"}}</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

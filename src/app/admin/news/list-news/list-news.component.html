@@ -44,7 +44,7 @@
                                 <div class="row">
                                     <div class="col-md-1"><i class="fa fa-clock-o"></i></div>
                                     <div class="col-md-9">
-                                        <p style="font-size:0.61em; margin-top:0.5em"> 12/03/14 00:33</p>
+                                        <p style="font-size:0.61em; margin-top:0.5em"> {{n.created_at.date | amTimeAgo}}</p>
                                     </div>
                                 </div>
 
@@ -92,7 +92,7 @@
                         {{singleNews? singleNews.title: 'is not available'}}
                     </h5>
 
-                    <span>Updated At:{{singleNews.created_at.date}}</span>
+                    <span>Updated: {{singleNews.created_at.date | amTimeAgo}}</span>
                     <img src="{{singleNews.main_image}}" alt="">
                     <p>
                         {{singleNews.content}}
@@ -205,8 +205,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="newsModal.hide()" mdbWavesEffect>Close</button>
-                    <button type="button" class="btn btn-primary btn-sm waves-light" (click)="submitNewsForm(f, this.editContent)" mdbWavesEffect>Save changes</button>
+                    <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="newsModal.hide()" mdbWavesEffect>Dismiss</button>
+                    <button type="button" class="btn btn-primary btn-sm waves-light" (click)="submitNewsForm(f, this.editContent)" mdbWavesEffect>{{editContent? "Update News":"Post News"}}</button>
                 </div>
             </form>
         </div>

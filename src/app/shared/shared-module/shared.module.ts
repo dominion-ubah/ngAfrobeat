@@ -7,6 +7,7 @@ import { MDBBootstrapModulePro } from './../../typescripts/pro/index';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { FileUploadModule } from 'ng2-file-upload';
+import { MomentModule } from 'angular2-moment';
 
 import { FormsModule } from '@angular/forms'
 
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http'
     FileUploadModule,
     RouterModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MomentModule
   ],
   declarations: [HeaderComponent, FooterComponent],
   exports: [
@@ -38,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http'
     BrowserAnimationsModule,
     Ng2CloudinaryModule,
     FileUploadModule,
+    MomentModule,
     HeaderComponent,
     FooterComponent
   ],

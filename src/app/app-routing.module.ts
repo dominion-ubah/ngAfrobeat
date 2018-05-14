@@ -15,10 +15,11 @@ import {AlbumDetailsComponent} from './modules/music/album-details/album-details
 import {ArtistDetailsComponent} from './modules/music/artist-details/artist-details.component';
 
 
-const routes = RouterModule.forRoot([
+const routes = [
   {
     path: '',
     component: BaseComponent,
+
     // pathMatch: 'full',
     children: [
       {
@@ -54,29 +55,36 @@ const routes = RouterModule.forRoot([
         component: NewsDetailsComponent
       },
       {
-        path: 'music-details-page',
+        path: 'music-details-page/:id',
         component: MusicDetailsComponent
-        },
-        {
-            path: 'album-details-page',
-            component: AlbumDetailsComponent
-        },
-        {
-            path: 'artist-details-page',
-            component: ArtistDetailsComponent
-        },
-      // { path: '', redirectTo: 'home', pathMatch: 'full' },
+      },
+      {
+        path: 'album-details-page/:id',
+        component: AlbumDetailsComponent
+      },
+      {
+        path: 'artist-details-page/:id',
+        component: ArtistDetailsComponent
+      }
 
+      // { path: '', redirectTo: 'home', pathMatch: 'full' },
     ]
   }
+]
 
 
-
-  // { path: "**", component: NotFoundComponent }
-]);
+  // { path: "**", component: NotFoundComponent };
 
 @NgModule({
-  imports: [routes],
+  imports: [
+    RouterModule.forRoot(
+      routes,
+      {
+        // enableTracing: true,
+         useHash: true }
+      // <-- debugging purposes only
+    )
+    ],
   exports: [RouterModule]
 })
 

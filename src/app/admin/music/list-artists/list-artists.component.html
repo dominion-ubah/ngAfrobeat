@@ -1,0 +1,208 @@
+<!-- <div class="container"> -->
+<div class="row border">
+    <div class="col-md-7 elegant scrollbar-dusty-grass border">
+        <div class="col-md-12">
+            <h4>
+                SpotLight Aritsts
+            </h4>
+            <p>Display SpotLight Aritsts here
+
+            </p>
+            <a href="">coming Soon!!!</a>
+        </div>
+        <div class="col-md-12 ">
+            <h4>
+                Artists
+            </h4>
+            <div class="row">
+
+                <div class="col-md-4 my-md-1" *ngFor="let n of artistArray">
+
+                    <!-- Card -->
+                    <div class="card" (click)='getSingleartist(n.id)'>
+                        <h4 class="card-title px-md-1 py-md-1">{{n.name}}</h4>
+                        <div class="row">
+
+                            <div class="col-md-7">
+                                <!-- - Card content - -->
+                                <div class="card-body">
+
+                                    <p class="card-text">{{n.full_name}} </p>
+
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <!-- - Card image - -->
+                                <div class="view overlay">
+                                    <img class="card-img-bottom" src="{{n.main_image}}" alt="Card image cap">
+                                    <a href="#!">
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1"><i class="fa fa-clock-o"></i></div>
+                                    <div class="col-md-9">
+                                        <!-- <p style="font-size:0.61em; margin-top:0.5em"> {{n.created_at.date | amTimeAgo}}</p> -->
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    <!-- Card -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-md-5 border">
+        <ng-container *ngIf='!singleartist'>
+            <h4>
+                artist Details
+            </h4>
+            <p>
+                Display artist Details here
+            </p>
+        </ng-container>
+        <ng-container *ngIf='this.singleartist'>
+            <div class="card col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4>
+                            artist Details
+                        </h4>
+                    </div>
+                    <div class="col-md-2">
+                        <i class="fa fa-edit right light-green-text mt-1" (click)='setFormEdit(this.singleartist)'></i>
+                    </div>
+                </div>
+
+
+                <h5>
+                    {{singleartist? singleartist.name: 'is not available'}}
+                </h5>
+
+                <span>Updated: {{singleartist.created_at.date }}</span>
+                <img src="{{singleartist.main_image}}" alt="">
+                <p>
+                    {{singleartist.bio}}
+                </p>
+                <img src="{{singleartist.images}}" alt="">
+            </div>
+
+        </ng-container>
+    </div>
+</div>
+<!-- </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;" data-toggle="modal" data-target="#newartistForm" (click)="artistModal.show()">
+    <a class="btn-floating btn-lg green accent-2 waves-light" mdbWavesEffect><i class="fa fa-plus"></i></a>
+</div>
+
+
+
+<div mdbModal #artistModal="mdb-modal" class="modal fade" id="newartistForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-side modal-bottom-right modal-lg" style="min-width:50em" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title w-100" id="myModalLabel">{{editContent? "Edit artist":"Create artist"}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="artistModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+            </div>
+            <form action="" #f="ngForm">
+                <div class="modal-body">
+
+
+                    <!-- 
+                    'id': '1',
+                    'name': 'Wizkid',
+                    'full_name': 'Ayo Balogun',
+                    'main_image': 'http://via.placeholder.com/150x150',
+                    'bio': '.mlknbjvhcgfxdzxfcgvhbjnkml',
+                    'images': 'http://via.placeholder.com/150x150',
+                    'type': 'music',
+                    'categories': '.mlknbjvhcgfxdzxfcgvhbjnkml' -->
+                    <div class="md-form">
+                        <input mdbInputDirective mdbActive type="text" [(ngModel)]="this.editContent? this.editContent.name : f.name" name="name" id="name" class="form-control">
+                        <label for="name" class="" [class.active]="this.editContent"> Artist Name</label>
+                    </div>
+                    <div class="md-form">
+                        <input mdbInputDirective mdbActive type="text" [(ngModel)]="this.editContent? this.editContent.full_name:f.full_name" name="full_name" id="full_name" class="form-control">
+                        <label for="full_name" class="" [class.active]="this.editContent">Full Name</label>
+                    </div>
+                    <!-- <div class="md-form">
+                        <input mdbInputDirective mdbActive type="text" [(ngModel)]="f.tags" name="tags" id="tags" class="form-control">
+                        <label for="tags" class="">Tags</label>
+                    </div> -->
+                    <!-- <div class="md-form">
+                        <input mdbInputDirective mdbActive type="text" [(ngModel)]="f.categories" name="categories" id="categories" class="form-control">
+                        <label for="category" class="">Category</label>
+                    </div> -->
+                    <!--Basic textarea-->
+                    <div class="md-form">
+                        <textarea mdbInputDirective mdbActive type="text" [(ngModel)]="this.editContent? this.editContent.bio:f.bio" name="bio" id="bio" class="md-textarea form-control" rows="3"></textarea>
+                        <label for="bio" [class.active]="this.editContent">Artist Bio </label>
+                    </div>
+                    <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
+                    <button [disabled]="loading" (click)="upload()" class="btn btn-success mt-3">Upload</button>
+                    <!-- <div class="file-field md-form">
+                        <div class="btn btn-primary btn-sm waves-light" mdbWavesEffect>
+                            <span>Upload Main Image</span>
+                            <input type="file" name="imageArray" mdbFileSelect (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path" type="text" placeholder="Upload your Main Image" [value]="showFiles()">
+                        </div>
+                    </div> -->
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="artistModal.hide()" mdbWavesEffect>Dismiss</button>
+                    <button type="button" class="btn btn-primary btn-sm waves-light" (click)="submitArtistForm(f, this.editContent)" mdbWavesEffect>{{editContent? "Update Artist":"Create Artist"}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,241 @@
+<!-- <div class="container"> -->
+<div class="row border">
+    <div class="col-md-7 elegant scrollbar-dusty-grass border">
+        <div class="col-md-12">
+            <h4>
+                Latest Songs
+            </h4>
+            <p>
+                Display latest Songs here
+            </p>
+            <a href="">coming Soon!!!</a>
+        </div>
+        <div class="col-md-12 ">
+            <h4>
+                Songs
+            </h4>
+            <div class="row">
+
+                <div class="col-md-4 my-md-1" *ngFor="let s of songArray">
+
+                    <!-- Card -->
+                    <div class="card" (click)='getSingleSong(s.id)'>
+                        <h4 class="card-title px-md-1 py-md-1">{{s.name}}</h4>
+                        <div class="row">
+
+                            <div class="col-md-7">
+                                <!-- - Card content - -->
+                                <div class="card-body">
+
+                                    <p class="card-text" style='height:20px; overflow:hidden'>{{s.description}} </p>
+
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <!-- - Card image - -->
+                                <div class="view overlay">
+                                    <img class="card-img-bottom" src="{{s.cover_image}}" alt="Card image cap">
+                                    <a href="#!">
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1"><i class="fa fa-clock-o"></i></div>
+                                    <div class="col-md-9">
+                                        <p style="font-size:0.61em; margin-top:0.5em"> {{s.released_date }}</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    <!-- Card -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-md-5 border">
+        <ng-container *ngIf='!singleSong'>
+            <h4>
+                Song Details
+            </h4>
+            <p>
+                Display Song Details here
+            </p>
+        </ng-container>
+        <ng-container *ngIf='this.singleSong'>
+            <div class="card col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4>
+                            Song Details
+                        </h4>
+                    </div>
+                    <div class="col-md-2">
+                        <i class="fa fa-edit right light-green-text mt-1" (click)='setFormEdit(this.singleSong)'></i>
+                    </div>
+                </div>
+
+
+                <h5>
+                    {{singleSong? singleSong.name: 'is not available'}}
+                </h5>
+
+                <span>Updated: {{singleSong.created_at.date }}</span>
+                <img src="{{singleSong.main_image}}" alt="">
+                <p>
+                    {{singleSong.bio}}
+                </p>
+                <img src="{{singleSong.images}}" alt="">
+            </div>
+
+        </ng-container>
+    </div>
+</div>
+<!-- </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;" data-toggle="modal" data-target="#newSongForm" (click)="songModal.show()">
+    <a class="btn-floating btn-lg green accent-2 waves-light" mdbWavesEffect><i class="fa fa-plus"></i></a>
+</div>
+
+
+
+<div mdbModal #songModal="mdb-modal" class="modal fade" id="newSongForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-side modal-bottom-right modal-lg" style="min-width:50em" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title w-100" id="myModalLabel">{{editContent? "Edit song":"Add song"}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="songModal.hide()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+            </div>
+            <form action="" #f="ngForm">
+                <div class="modal-body">
+
+                    <div class="md-form">
+
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <input mdbInputDirective mdbActive type="text" [(ngModel)]="this.editContent? this.editContent.name : f.name" name="name" id="name" class="form-control">
+                                <label for="name" class="ml-md-3" [class.active]="this.editContent"> Song Title</label>
+                            </div>
+                            <!-- TODO: change from manual STRING ENTRY to date format -->
+                            <div class="col-md-6">
+                                <input mdbInputDirective mdbActive type="text" [(ngModel)]="this.editContent? this.editContent.released_date:f.released_date" name="released_date" id="released_date" class=" form-control" />
+                                <label for="released_date" class="ml-md-3" [class.active]="this.editContent">Song Released Date </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- <div class="col-md-12" style="margin: 0.55em 0 0 -0.9em">
+                        <mdb-select [(ngModel)]="this.editContent? this.editContent.album_id:f.album_id" name="album_id" [options]="iconsSelect" placeholder="Album"></mdb-select>
+                        - <label for="type">Album</label> -
+                    </div> -->
+                    <!-- <div class="col-md-12" style="margin: 0.55em 0 0 -0.9em">
+                        <mdb-select [(ngModel)]="this.editContent? this.editContent.genre_id:f.genre_id" name="genre_id" [options]="iconsSelect" placeholder="Genre"></mdb-select>
+                        - <label for="type">Genre</label> -
+                    </div> -->
+                    <!-- <div class="col-md-12" style="margin: 0.55em 0 0 -0.9em">
+                        <mdb-select [(ngModel)]="this.editContent? this.editContent.artist_id:f.artist_id" name="artist_id" [options]="iconsSelect" placeholder="Artist"></mdb-select>
+                        - <label for="type">Artist</label> -
+                    </div> -->
+                    <!-- <div class="md-form">
+                            <input mdbInputDirective mdbActive type="text" [(ngModel)]="f.tags" name="tags" id="tags" class="form-control">
+                            <label for="tags" class="">Tags</label>
+                        </div> -->
+                    <!-- <div class="md-form">
+                            <input mdbInputDirective mdbActive type="text" [(ngModel)]="f.categories" name="categories" id="categories" class="form-control">
+                            <label for="category" class="">Category</label>
+                        </div> -->
+                    <!--Description of the song-->
+                    <div class="md-form">
+                        <textarea mdbInputDirective mdbActive type="text" [(ngModel)]="this.editContent? this.editContent.description:f.description" name="description" id="bio" class="md-textarea form-control" rows="3"></textarea>
+                        <label for="bio" [class.active]="this.editContent">Song Description </label>
+                    </div>
+                    <div class="md-form">
+                        <div class="row mx-0">
+
+                            <!-- video or audio -->
+                            <div class="col-md-6" style="margin: 0.55em 0 0 -0.9em">
+                                <mdb-select [(ngModel)]="this.editContent? this.editContent.type:f.type" name="type" [options]="fileType" placeholder="What type of file is this?"></mdb-select>
+                                <!-- - <label for="type">Song Type</label> - -->
+
+                            </div>
+                            <div class="col-md-6" style="margin: 0.55em 0 0 0.9em">
+                                <mdb-select [(ngModel)]="this.editContent? this.editContent.artist_id:f.artist_id" name="artist_id" [options]="artistArray" placeholder="Artist"></mdb-select>
+                                <!-- - <label for="type">Artist</label> - -->
+                            </div>
+                            <!--
+                            <div class="col-md-6" style="margin: 0.55em 0 0 0.9em">
+                                <mdb-select [(ngModel)]="this.editContent? this.editContent.type:f.kind" name="kind" [options]="AssetType" placeholder="What upload is this"></mdb-select>
+                                - <label for="type">Song Type</label> -
+                            </div>-->
+
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <input type="file" id='as' ng2FileSelect value="image" [uploader]="uploader" accept="image/*;capture=camera">
+                            <label for="as">Image</label>
+                            <input type="file" ng2FileSelect value="video" [uploader]="uploader2" accept="image/*;capture=camera">
+                            <label for="as">Audio</label>
+                        </div>
+                        <div class="col-md-6" style="margin-top:-1.5em">
+                            <button [disabled]="loading" (click)="upload(f)" class="btn btn-success mt-3">Upload</button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="songModal.hide()" mdbWavesEffect>Dismiss</button>
+                    <button type="button" class="btn btn-primary btn-sm waves-light" (click)="submitSongForm(f, this.editContent)" mdbWavesEffect>{{editContent? "Update Song":"Create Song"}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

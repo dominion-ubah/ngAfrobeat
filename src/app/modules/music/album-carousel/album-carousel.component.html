@@ -1,3 +1,48 @@
-<p>
-  album-carousel works!
-</p>
+<mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="" [animation]="'slide'">
+
+
+
+    <mdb-slide *ngFor='let n of newArr'>
+
+
+        <ng-container *ngFor='let a of n; let i = index'>
+            <ng-container *ngIf="compare(i)">
+
+
+
+
+
+                <div class="col-md-4">
+                    <a [routerLink]="['/album-details-page', a.id]">
+                        <div class="card" style="height:300px">
+                            <img src="{{a.cover_image}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">{{a.name}}</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+            </ng-container>
+            <ng-container *ngIf="!compare(i)">
+                <div class="col-md-4 clearfix d-none d-md-block">
+                    <a [routerLink]="['/album-details-page', a.id]">
+                        <div class="card" style="height:300px">
+                            <img src="{{a.cover_image}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">{{a.name}}</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+            </ng-container>
+
+        </ng-container>
+
+    </mdb-slide>
+
+</mdb-carousel>
+<!--/.Carousel Wrapper-->

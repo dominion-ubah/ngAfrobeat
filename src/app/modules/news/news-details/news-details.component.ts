@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { NewsService } from 'app/modules/news/news.service';
 
-import {InitParams, FacebookService, LoginResponse, LoginOptions, UIResponse, UIParams, FBVideoComponent } from 'ngx-facebook';
+import {FacebookService, LoginResponse, LoginOptions, UIResponse, UIParams, FBVideoComponent } from 'ngx-facebook';
 @Component({
   selector: 'app-news-details',
   templateUrl: './news-details.component.html',
@@ -22,12 +22,12 @@ export class NewsDetailsComponent implements OnInit {
     // private router: Router
 
   ) {
-//     let initParams: InitParams = {
-//       // appId: '1927971220769787',
-//       appId: '2130518847191362',
-//       // xfbml: true,
-//       version: 'v2.8'
-//     };
+    // let initParams: InitParams = {
+    //   // appId: '1927971220769787',
+    //   appId: '2130518847191362',
+    //   // xfbml: true,
+    //   version: 'v2.8'
+//    };
 // console.log('Initializing Facebook');
 //     this.fb.init(initParams);
    }
@@ -42,6 +42,7 @@ export class NewsDetailsComponent implements OnInit {
     // this.newsSingleArray$ = this.getNewsDetails(this.route.snapshot.params['id']);
     const item_id = this.route.snapshot.params['id']
     this.getNewsDetails(item_id);
+    
     // this.newsSingleArray$ = this.getNewsDetails(this.route.snapshot.params['id']);
 
     // const obj = this.news$.reduce((o, key) => Object.assign(o, {[key]: 'data'}), {});
@@ -65,16 +66,6 @@ export class NewsDetailsComponent implements OnInit {
 
 
   }
-
-
-
-
-
-
-
-
-
-
    /**
    * Login with minimal permissions. This allows you to see their public profile only.
    */
@@ -105,12 +96,6 @@ export class NewsDetailsComponent implements OnInit {
 
   }
 
-  getLoginStatus() {
-    this.fb.getLoginStatus()
-      .then(console.log.bind(console))
-      .catch(console.error.bind(console));
-  }
-
 
   /**
    * Get the user's profile
@@ -119,18 +104,6 @@ export class NewsDetailsComponent implements OnInit {
     this.fb.api('/me')
       .then((res: any) => {
         console.log('Got the users profile', res);
-      })
-      .catch(this.handleError);
-  }
-
-
-  /**
-   * Get the users friends
-   */
-  getFriends() {
-    this.fb.api('/me/friends')
-      .then((res: any) => {
-        console.log('Got the users friends', res);
       })
       .catch(this.handleError);
   }
@@ -152,19 +125,6 @@ export class NewsDetailsComponent implements OnInit {
       })
       .catch(this.handleError);
 
-  }
-
-
-  playVideo() {
-    this.video.play();
-  }
-
-  onVideoEvent(ev) {
-    console.log('Video event fired: ' + ev);
-  }
-
-  pauseVideo() {
-    this.video.pause();
   }
 
 

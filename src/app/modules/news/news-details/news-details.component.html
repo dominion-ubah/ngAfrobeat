@@ -36,7 +36,7 @@
                 <ng-container *ngIf='this.news'>
                     <h1>{{news ? news.title : '' }}</h1>
                     <span class="time">
-                            {{news ? news.created_at.date : '' }}
+                            {{news ? (news.created_at.date |  amTimeAgo) : '' }}
                 </span>
                     <img class="mainPic" src="{{news ? news.main_image : ''}}">
                     <p>{{news ? news.content : ''}}</p>
@@ -157,6 +157,10 @@
                         <!--Unique-->
                         <button type="button" class="btn btn-unique waves-light" mdbRippleRadius>Comment</button>
                     </div>
+                    <div style="width:500px; height:120px; border:1px solid red">
+                        <fb-comments href='http://localhost:4200/news-details-page/66' width='500px'></fb-comments>
+                    </div>
+
                 </div>
             </div>
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { NewsService } from 'app/modules/news/news.service';
-
+// import * as moment from 'angular2-moment'
 @Component({
   selector: 'app-newspage',
   templateUrl: './newspage.component.html',
@@ -43,7 +43,6 @@ public news$;
     () => console.log('done')
   )
   }
-
 }
 
 

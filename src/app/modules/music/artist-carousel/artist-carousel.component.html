@@ -1,3 +1,60 @@
-<p>
-  artist-carousel works!
-</p>
+<div class="mainTitle">
+    <h2>Artist</h2>
+    <ul class="newsNav nav row">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Hot</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Trending</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">View All</a>
+        </li>
+    </ul>
+</div>
+
+
+
+<mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="" [animation]="'slide'">
+
+
+
+
+    <mdb-slide *ngFor='let n of newArr'>
+
+
+        <ng-container *ngFor='let a of n; let i = index'>
+            <ng-container *ngIf="compare(i)">
+
+                <div class="col-md-4">
+                    <a [routerLink]="['/artist-details-page', a.id]">
+                        <div class="card" style='height:300px'>
+                            <img src="{{a.cover_image}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">{{a.name}}</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+            </ng-container>
+            <ng-container *ngIf="!compare(i)">
+                <div class="col-md-4 clearfix d-none d-md-block">
+                    <a [routerLink]="['/artist-details-page', a.id]">
+                        <div class="card" style='height:300px'>
+                            <img src="{{a.cover_image}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">{{a.name}}</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </ng-container>
+
+        </ng-container>
+
+    </mdb-slide>
+
+
+</mdb-carousel>

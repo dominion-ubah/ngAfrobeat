@@ -47,7 +47,10 @@
                                     <a href="#" [routerLink]="['/news-details-page', n.id]">{{n.title}}</a>
                                 </h3>
                                 <span class="time">
-                                <p>{{n.created_at.date}}</p>
+
+                                        <p>{{ n.created_at.date |  amTimeAgo}}</p>
+                                       
+                                <!-- <p>{{ n.created_at.date | amLocale:'en' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</p> -->
                               </span>
                                 <p><a [routerLink]="['/news-details-page', n.id]">{{n.subtitle}} </a></p>
 

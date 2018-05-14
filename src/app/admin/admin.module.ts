@@ -7,6 +7,7 @@ import { NewsModule } from 'app/admin/news/news.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin.component';
+import { MusicModule } from 'app/admin/music/music.module';
 
 
 
@@ -15,6 +16,7 @@ import { AdminComponent } from './admin.component';
     CommonModule,
     SharedModule,
     NewsModule,
+    MusicModule,
     AdminRoutingModule
   ],
   declarations: [DashboardComponent, AdminComponent],

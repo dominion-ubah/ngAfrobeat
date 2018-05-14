@@ -24,6 +24,7 @@ import { AdvertsModule } from './modules/adverts/adverts.module';
 import { NewsService } from 'app/modules/news/news.service';
 import { AdminModule } from './admin/admin.module';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { MusicService } from './modules/music/music.service';
 
 declare var Hammer: any;
 
@@ -74,10 +75,11 @@ export class MyHammerConfig extends HammerGestureConfig {
     AdvertsModule,
     AdminModule
   ],
-  providers: [MDBSpinningPreloader, NewsService,
+  providers: [MDBSpinningPreloader, NewsService, MusicService,
     {
         provide: HAMMER_GESTURE_CONFIG,
-        useClass: MyHammerConfig
+        useClass: MyHammerConfig,
+
     }
 ],
   bootstrap: [AppComponent],
